@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8146f13235554316b878503ca29ed14b" Name="Diagram1">
+        <EntityTypeShape EntityType="FlowerShopDbModel.Account" Width="1.5" PointX="0.625" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlowerShopDbModel.Category" Width="1.5" PointX="0.625" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlowerShopDbModel.Order" Width="1.5" PointX="2.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlowerShopDbModel.OrdersDetail" Width="1.5" PointX="4.875" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlowerShopDbModel.Product" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="FlowerShopDbModel.CategoryProduct" />
+        <AssociationConnector Association="FlowerShopDbModel.ProductOrdersDetail" />
+        <AssociationConnector Association="FlowerShopDbModel.OrderOrdersDetail" />
+        <AssociationConnector Association="FlowerShopDbModel.AccountOrder" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<div class="left_content">
+    <div class="crumb_nav"> <a href="@Url.Action("Index", "Home")">home</a> &gt;&gt; @ViewBag.category.Name </div>
+    <div class="title"><span class="title_icon"><img alt="" src="@Url.Content("~/Content/Custom/")images/bullet1.gif"></span>Category products</div>
+    <div class="new_products">
+
+        @foreach ()
+        {
+            <div class="new_prod_box">
+                <a href="#">product name</a>
+                <div class="new_prod_bg"> <a href="#"><img class="thumb" alt="" src="@Url.Content("~/Content/Custom/")images/thumb1.gif" border="0"></a> </div>
+            </div>
+        }
+        
+
+        @*<div class="new_prod_box">
+                <a href="#">product name</a>
+                <div class="new_prod_bg"> <span class="new_icon"><img alt="" src="@Url.Content("~/Content/Custom/")images/new_icon.gif"></span> <a href="#"><img class="thumb" alt="" src="@Url.Content("~/Content/Custom/")images/thumb2.gif" border="0"></a> </div>
+            </div>
+            <div class="new_prod_box">
+                <a href="#">product name</a>
+                <div class="new_prod_bg"> <span class="new_icon"><img alt="" src="@Url.Content("~/Content/Custom/")images/promo_icon.gif"></span> <a href="#"><img class="thumb" alt="" src="@Url.Content("~/Content/Custom/")images/thumb3.gif" border="0"></a> </div>
+            </div>
+            <div class="new_prod_box">
+                <a href="#">product name</a>
+                <div class="new_prod_bg"> <a href="#"><img class="thumb" alt="" src="@Url.Content("~/Content/Custom/")images/thumb1.gif" border="0"></a> </div>
+            </div>
+            <div class="new_prod_box">
+                <a href="#">product name</a>
+                <div class="new_prod_bg"> <span class="new_icon"><img alt="" src="@Url.Content("~/Content/Custom/")images/promo_icon.gif"></span> <a href="#"><img class="thumb" alt="" src="@Url.Content("~/Content/Custom/")images/thumb2.gif" border="0"></a> </div>
+            </div>
+            <div class="new_prod_box">
+                <a href="#">product name</a>
+                <div class="new_prod_bg"> <a href="#"><img class="thumb" alt="" src="@Url.Content("~/Content/Custom/")images/thumb3.gif" border="0"></a> </div>
+            </div>
+            <div class="new_prod_box">
+                <a href="#">product name</a>
+                <div class="new_prod_bg"> <span class="new_icon"><img alt="" src="@Url.Content("~/Content/Custom/")images/new_icon.gif"></span> <a href="#"><img class="thumb" alt="" src="@Url.Content("~/Content/Custom/")images/thumb2.gif" border="0"></a> </div>
+            </div>
+            <div class="new_prod_box">
+                <a href="#">product name</a>
+                <div class="new_prod_bg"> <a href="#"><img class="thumb" alt="" src="@Url.Content("~/Content/Custom/")images/thumb1.gif" border="0"></a> </div>
+            </div>
+            <div class="new_prod_box">
+                <a href="#">product name</a>
+                <div class="new_prod_bg"> <a href="#"><img class="thumb" alt="" src="@Url.Content("~/Content/Custom/")images/thumb1.gif" border="0"></a> </div>
+            </div>
+            <div class="new_prod_box">
+                <a href="#">product name</a>
+                <div class="new_prod_bg"> <span class="new_icon"><img alt="" src="@Url.Content("~/Content/Custom/")images/new_icon.gif"></span> <a href="#"><img class="thumb" alt="" src="@Url.Content("~/Content/Custom/")images/thumb1.gif" border="0"></a> </div>
+            </div>
+            <div class="new_prod_box">
+                <a href="#">product name</a>
+                <div class="new_prod_bg"> <a href="#"><img class="thumb" alt="" src="@Url.Content("~/Content/Custom/")images/thumb1.gif" border="0"></a> </div>
+            </div>
+            <div class="pagination"> <span class="disabled">&lt;&lt;</span><span class="current">1</span><a href="#">2</a><a href="#">3</a>…<a href="#">10</a><a href="#">11</a><a href="#">&gt;&gt;</a> </div>*@
+
+    </div>
+    <div class="clear"></div>
+</div>
+
