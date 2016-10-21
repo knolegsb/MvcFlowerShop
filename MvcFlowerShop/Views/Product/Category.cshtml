@@ -9,11 +9,11 @@
     <div class="title"><span class="title_icon"><img alt="" src="@Url.Content("~/Content/Custom/")images/bullet1.gif"></span>Category products</div>
     <div class="new_products">
 
-        @foreach ()
+        @foreach (var product in ViewBag.products)
         {
             <div class="new_prod_box">
-                <a href="#">product name</a>
-                <div class="new_prod_bg"> <a href="#"><img class="thumb" alt="" src="@Url.Content("~/Content/Custom/")images/thumb1.gif" border="0"></a> </div>
+                <a href="#">@product.Name</a>
+                <div class="new_prod_bg"> <a href="#"><img class="thumb" alt="" src="@Url.Content("~/Content/Custom/")images/@product.Photo" border="0"></a> </div>
             </div>
         }
         
