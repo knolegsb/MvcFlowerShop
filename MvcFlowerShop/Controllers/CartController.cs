@@ -11,6 +11,8 @@ namespace MvcFlowerShop.Controllers
     public class CartController : Controller
     {
         private IProductRepository productRepository = new ProductRepository();
+        private IOrderRepository orderRepository = new OrderRepository();
+        private IOrderDetailRepository orderDetailRepository = new OrderDetailRepository();
 
         public ActionResult Index()
         {
@@ -69,6 +71,44 @@ namespace MvcFlowerShop.Controllers
             cart.RemoveAt(id);
             Session["cart"] = cart;
             return View("Index");
+        }
+
+        public ActionResult Checkout(int id)
+        {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("MyAccount", "Account");
+            }
+            else
+            {
+                List<Item> cart = (List<Item>)Session["cart"];
+
+                // Save Order
+                Order order = new MvcFlowerShop.Order();
+                order.CreationDate = DateTime.Now;
+                order.Name = "New Order";
+                order.Payment = "PayPal";
+                order.Status = true;
+                order.Username = Session["username"].ToString();
+                int orderId = orderRepository.Create(order);
+
+                // Save Order Detail
+                foreach(var item in cart)
+                {
+                    OrdersDetail ordersDetail = new OrdersDetail();
+                    ordersDetail.OrdersId = orderId;
+                    ordersDetail.ProductId = item.Product.Id;
+                    ordersDetail.Price = item.Product.Price;
+                    ordersDetail.Quantity = item.Quantity;
+                    orderDetailRepository.Create(ordersDetail);
+                }
+
+                // Remove Cart
+                Session.Remove("cart");
+
+                return View("Thanks");
+            }
+            
         }
     }
 }

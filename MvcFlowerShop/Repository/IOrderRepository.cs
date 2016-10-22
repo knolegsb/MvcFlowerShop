@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace MvcFlowerShop.Repository
 {
-    public interface IAccountRepository
+    public interface IOrderRepository
     {
-        void Create(Account account);
-        Account Login(string userName, string password);
+        int Create(Order order);
     }
 }

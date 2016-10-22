@@ -1,5 +1,5 @@
 ﻿@using MvcFlowerShop.Repository
-
+@using MvcFlowerShop.Models
 @{ 
     ICategoryRepository categoryRepository = new CategoryRepository();
 }
@@ -31,9 +31,9 @@
                     <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Specials") && ViewContext.RouteData.Values["controller"].ToString().Equals("Product") ? "class=selected" : "")>
                         <a href="@Url.Action("Specials", "Product")">specials gifts</a>
                     </li>
-                    
+
                     @*<li @(ViewContext.RouteData.Values["action"].ToString().Equals("Details")
-            && ViewContext.RouteData.Values["controller"].ToString().Equals("Product") ? "class=selected" : "")><a href="@Url.Action("Details", "Product")">prices</a></li>*@
+                        && ViewContext.RouteData.Values["controller"].ToString().Equals("Product") ? "class=selected" : "")><a href="@Url.Action("Details", "Product")">prices</a></li>*@
                     <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Contact") && ViewContext.RouteData.Values["controller"].ToString().Equals("Home") ? "class=selected" : "")>
                         <a href="@Url.Action("Contact", "Home")">contact</a>
                     </li>
@@ -52,30 +52,87 @@
             </div>
             <!--end of left content-->
             <div class="right_content">
-                <div class="languages_box"> <span class="red">Languages:</span> <a href="#" class="selected"><img src="@Url.Content("~/Content/Custom/")images/gb.gif" alt="" border="0" /></a> <a href="#"><img src="@Url.Content("~/Content/Custom/")images/fr.gif" alt="" border="0" /></a> <a href="#"><img src="@Url.Content("~/Content/Custom/")images/de.gif" alt="" border="0" /></a> </div>
-                <div class="currency"> <span class="red">Currency: </span> <a href="#">GBP</a> <a href="#">EUR</a> <a href="#" class="selected">USD</a> </div>
+                <div class="languages_box">
+                    <span class="red">Languages:</span> <a href="#" class="selected">
+                        <img src="@Url.Content("~/Content/Custom/")images/gb.gif" alt="" border="0" />
+                    </a>
+                    <a href="#">
+                        <img src="@Url.Content("~/Content/Custom/")images/fr.gif" alt="" border="0" />
+                    </a>
+                    <a href="#"><img src="@Url.Content("~/Content/Custom/")images/de.gif" alt="" border="0" /></a>
+                </div>
+                <div class="currency">
+                    <span class="red">Currency: </span>
+                    <a href="#">GBP</a> <a href="#">EUR</a>
+                    <a href="#" class="selected">USD</a>
+                </div>
                 <div class="cart">
-                    <div class="title"><span class="title_icon"><img src="@Url.Content("~/Content/Custom/")images/cart.gif" alt="" /></span>My cart</div>
-                    <div class="home_cart_content"> 3 x items | <span class="red">TOTAL: 100$</span> </div>
+                    <div class="title">
+                        <span class="title_icon">
+                            <img src="@Url.Content("~/Content/Custom/")images/cart.gif" alt="" />
+                        </span>My cart
+                    </div>
+                    <div class="home_cart_content">
+                        @{
+                            var n = 0;
+                            decimal sum = 0;
+                            if (Session["cart"] != null)
+                            {
+                                List<Item> cart = (List<Item>)Session["cart"];
+                                n = cart.Count;
+                                sum = cart.Sum(i => i.Product.Price * i.Quantity).Value;
+                            }
+                        }
+                        @n x items | <span class="red">TOTAL: $@sum</span>
+                    </div>
                     <a href="@Url.Action("Index", "Cart")" class="view_cart">view cart</a>
                 </div>
-                <div class="title"><span class="title_icon"><img src="@Url.Content("~/Content/Custom/")images/bullet3.gif" alt="" /></span>About Our Shop</div>
+                <div class="title">
+                    <span class="title_icon">
+                        <img src="@Url.Content("~/Content/Custom/")images/bullet3.gif" alt="" />
+                    </span>About Our Shop
+                </div>
                 <div class="about">
                     <p> <img src="@Url.Content("~/Content/Custom/")images/about.gif" alt="" class="right" /> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. </p>
                 </div>
                 <div class="right_box">
-                    <div class="title"><span class="title_icon"><img src="@Url.Content("~/Content/Custom/")images/bullet4.gif" alt="" /></span>Promotions</div>
-                    <div class="new_prod_box">
-                        <a href="#">product name</a>
-                        <div class="new_prod_bg"> <span class="new_icon"><img src="@Url.Content("~/Content/Custom/")images/promo_icon.gif" alt="" /></span> <a href="#"><img src="@Url.Content("~/Content/Custom/")images/thumb1.gif" alt="" class="thumb" border="0" /></a> </div>
+                    <div class="title">
+                        <span class="title_icon">
+                            <img src="@Url.Content("~/Content/Custom/")images/bullet4.gif" alt="" />
+                        </span>Promotions
                     </div>
                     <div class="new_prod_box">
                         <a href="#">product name</a>
-                        <div class="new_prod_bg"> <span class="new_icon"><img src="@Url.Content("~/Content/Custom/")images/promo_icon.gif" alt="" /></span> <a href="#"><img src="@Url.Content("~/Content/Custom/")images/thumb2.gif" alt="" class="thumb" border="0" /></a> </div>
+                        <div class="new_prod_bg">
+                            <span class="new_icon">
+                                <img src="@Url.Content("~/Content/Custom/")images/promo_icon.gif" alt="" />
+                            </span>
+                            <a href="#">
+                                <img src="@Url.Content("~/Content/Custom/")images/thumb1.gif" alt="" class="thumb" border="0" />
+                            </a>
+                        </div>
                     </div>
                     <div class="new_prod_box">
                         <a href="#">product name</a>
-                        <div class="new_prod_bg"> <span class="new_icon"><img src="@Url.Content("~/Content/Custom/")images/promo_icon.gif" alt="" /></span> <a href="#"><img src="@Url.Content("~/Content/Custom/")images/thumb3.gif" alt="" class="thumb" border="0" /></a> </div>
+                        <div class="new_prod_bg">
+                            <span class="new_icon">
+                                <img src="@Url.Content("~/Content/Custom/")images/promo_icon.gif" alt="" />
+                            </span>
+                            <a href="#">
+                                <img src="@Url.Content("~/Content/Custom/")images/thumb2.gif" alt="" class="thumb" border="0" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="new_prod_box">
+                        <a href="#">product name</a>
+                        <div class="new_prod_bg">
+                            <span class="new_icon">
+                                <img src="@Url.Content("~/Content/Custom/")images/promo_icon.gif" alt="" />
+                            </span>
+                            <a href="#">
+                                <img src="@Url.Content("~/Content/Custom/")images/thumb3.gif" alt="" class="thumb" border="0" />
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="right_box">
@@ -85,7 +142,7 @@
                         {
                             <li><a href="@Url.Action("Category", "Product", new { id = category.Id })">@category.Name</a></li>
                         }
-                       
+
                     </ul>
                     <div class="title"><span class="title_icon"><img src="@Url.Content("~/Content/Custom/")images/bullet6.gif" alt="" /></span>Partners</div>
                     <ul class="list">
@@ -110,12 +167,12 @@
                 <img src="@Url.Content("~/Content/Custom/")images/footer_logo.gif" alt="" /><br />
                 <a href="http://csscreme.com"><img src="@Url.Content("~/Content/Custom/")images/csscreme.gif" alt="" border="0" /></a>
             </div>
-            <div class="right_footer"> 
-                <a href="@Url.Action("Index", "Home")">home</a> 
-                <a href="@Url.Action("About", "Home")">about us</a> 
-                <a href="#">services</a> 
-                <a href="#">privacy policy</a> 
-                <a href="@Url.Action("Contact", "Home")">contact us</a> 
+            <div class="right_footer">
+                <a href="@Url.Action("Index", "Home")">home</a>
+                <a href="@Url.Action("About", "Home")">about us</a>
+                <a href="#">services</a>
+                <a href="#">privacy policy</a>
+                <a href="@Url.Action("Contact", "Home")">contact us</a>
             </div>
         </div>
     </div>

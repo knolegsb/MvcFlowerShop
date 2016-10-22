@@ -34,9 +34,26 @@ namespace MvcFlowerShop.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult MyAccount()
-        {
+        public ActionResult MyAccount()        {
+            
             return View("MyAccount");
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult MyAccount(Account account)
+        {
+            Account acc = accountRepository.Login(account.Username, account.Password);
+            if (acc == null)
+            {
+                ViewBag.Error = "Account's Invalid";
+                return View("MyAccount");
+            }
+            else
+            {
+                Session["username"] = acc.Username;
+                return View("Welcome");
+            }
         }
 
         private ApplicationSignInManager _signInManager;

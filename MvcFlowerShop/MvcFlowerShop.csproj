@@ -276,7 +276,11 @@
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\IAccountRepository.cs" />
     <Compile Include="Repository\ICategoryRepository.cs" />
+    <Compile Include="Repository\IOrderDetailRepository.cs" />
+    <Compile Include="Repository\IOrderRepository.cs" />
     <Compile Include="Repository\IProductRepository.cs" />
+    <Compile Include="Repository\OrderDetailRepository.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -453,6 +457,7 @@
     <Content Include="Views\Account\MyRegister.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Product\Latest.cshtml" />
+    <Content Include="Views\Cart\Thanks.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

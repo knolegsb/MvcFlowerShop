@@ -14,5 +14,10 @@ namespace MvcFlowerShop.Repository
             db.Accounts.Add(account);
             db.SaveChanges();
         }
+
+        public Account Login(string userName, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

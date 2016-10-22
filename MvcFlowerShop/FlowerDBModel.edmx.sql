@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 10/21/2016 10:49:36
+-- Date Created: 10/22/2016 11:06:10
 -- Generated from EDMX file: D:\VisualStudio2015\Projects\MvcFlowerShop\MvcFlowerShop\FlowerDBModel.edmx
 -- --------------------------------------------------
 
@@ -77,7 +77,7 @@ CREATE TABLE [dbo].[Orders] (
     [Name] nvarchar(50)  NOT NULL,
     [CreationDate] datetime  NOT NULL,
     [Payment] nvarchar(50)  NOT NULL,
-    [Status] nvarchar(50)  NOT NULL,
+    [Status] bit  NOT NULL,
     [Username] nvarchar(50)  NOT NULL,
     [Account_Username] nvarchar(50)  NOT NULL
 );

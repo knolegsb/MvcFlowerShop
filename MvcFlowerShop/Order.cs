@@ -24,7 +24,7 @@ namespace MvcFlowerShop
         public string Name { get; set; }
         public System.DateTime CreationDate { get; set; }
         public string Payment { get; set; }
-        public string Status { get; set; }
+        public bool Status { get; set; }
         public string Username { get; set; }
         public string Account_Username { get; set; }
     

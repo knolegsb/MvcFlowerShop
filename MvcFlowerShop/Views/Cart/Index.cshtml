@@ -6,7 +6,12 @@
 
 @using MvcFlowerShop.Models
 
-<div class="title"><span class="title_icon"><img src="@Url.Content("~/Content/Custom/")images/bullet1.gif" alt="" /></span>My cart</div>
+<div class="title">
+    <span class="title_icon">
+        <img src="@Url.Content("~/Content/Custom/")images/bullet1.gif" alt="" />
+    </span>My cart
+</div>
+
 <div class="feat_prod_box_details">
     <table class="cart_table">
         <tr class="cart_title">
@@ -19,27 +24,31 @@
         </tr>
 
         @*@{
-            List<Item> cart = (List<Item>)Session["cart"];
-        }*@
+                List<Item> cart = (List<Item>)Session["cart"];
+            }*@
 
         @{ int index = 0; }
-        @foreach (var item in (List<Item>)Session["cart"])
+        @if (Session["cart"] != null)
         {
-            <tr>
-                <td><a href="@Url.Action("Delete", "Cart", new { id = index })"> X </a></td>
-                <td>
-                    <a href="@Url.Action("Details", "Product", new { id = item.Product.Id })">
-                        <img src="@Url.Content("~/Content/Custom/")images/@item.Product.Photo" alt="" border="0" class="cart_thumb" width="30" height="31" />
-                    </a>
-                </td>
-                <td>@item.Product.Name</td>
-                <td>$@item.Product.Price</td>
-                <td>@item.Product.Quantity</td>
-                <td>$@(item.Product.Price* item.Product.Quantity)</td>
- 
-             </tr>
-            index++;
+            foreach (var item in (List<Item>)Session["cart"])
+            {
+                <tr>
+                    <td><a href="@Url.Action("Delete", "Cart", new { id = index })"> X </a></td>
+                    <td>
+                        <a href="@Url.Action("Details", "Product", new { id = item.Product.Id })">
+                            <img src="@Url.Content("~/Content/Custom/")images/@item.Product.Photo" alt="" border="0" class="cart_thumb" width="30" height="31" />
+                        </a>
+                    </td>
+                    <td>@item.Product.Name</td>
+                    <td>$@item.Product.Price</td>
+                    <td>@item.Product.Quantity</td>
+                    <td>$@(item.Product.Price * item.Product.Quantity)</td>
+
+                </tr>
+                index++;
+            }
         }
+
 
 
         @*<tr>
@@ -64,16 +73,24 @@
 
         <tr>
             <td colspan="4" class="cart_total"><span class="red">TOTAL:</span></td>
-            <td>$
+            <td>
+                $
                 @{
-                    List<Item> cart = (List<Item>) Session["cart"];
-                    var s = cart.Sum(i => i.Quantity * i.Product.Price);
+                    decimal s = 0;
+                    if (Session["cart"] != null)
+                    {
+                        List<Item> cart = (List<Item>)Session["cart"];
+                        s = cart.Sum(i => i.Quantity * i.Product.Price).Value;
+                    }
                 }@s
             </td>
         </tr>
     </table>
-    <a href="@Url.Action("Index", "Home")" class="continue">&lt; continue</a> 
-    <a href="#" class="checkout">checkout &gt;</a>
+
+
+
+    <a href="@Url.Action("Index", "Home")" class="continue">&lt; continue</a>
+    <a href="@Url.Action("Checkout", "Cart")" class="checkout">checkout &gt;</a>
 </div>
 <div class="clear"></div>
 
