@@ -4,135 +4,135 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FlowerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Accounts">
-          <Key>
-            <PropertyRef Name="Username" />
-          </Key>
-          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" />
-          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" />
-          <Property Name="Website" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="Categories">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Orders">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CreationDate" Type="datetime" Nullable="false" />
-          <Property Name="Payment" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Account_Username" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="OrdersDetails">
-          <Key>
-            <PropertyRef Name="OrdersId" />
-            <PropertyRef Name="ProductId" />
-          </Key>
-          <Property Name="OrdersId" Type="int" Nullable="false" />
-          <Property Name="ProductId" Type="int" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Quantity" Type="int" />
-          <Property Name="Product_Id" Type="int" Nullable="false" />
-          <Property Name="Order_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Products">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="Quantity" Type="int" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" />
-          <Property Name="Photo" Type="nvarchar" MaxLength="50" />
-          <Property Name="Specials" Type="nvarchar" MaxLength="50" />
-          <Property Name="CategoryId" Type="int" />
-          <Property Name="Category_Id" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_AccountOrder">
-          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Accounts">
-              <PropertyRef Name="Username" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="Account_Username" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CategoryProduct">
-          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
-          <End Role="Products" Type="Self.Products" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categories">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Products">
-              <PropertyRef Name="Category_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderOrdersDetail">
-          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
-          <End Role="OrdersDetails" Type="Self.OrdersDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Orders">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrdersDetails">
-              <PropertyRef Name="Order_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductOrdersDetail">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="OrdersDetails" Type="Self.OrdersDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrdersDetails">
-              <PropertyRef Name="Product_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="FlowerDBModelStoreContainer">
-          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrdersDetails" EntityType="Self.OrdersDetails" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AccountOrder" Association="Self.FK_AccountOrder">
-            <End Role="Accounts" EntitySet="Accounts" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CategoryProduct" Association="Self.FK_CategoryProduct">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderOrdersDetail" Association="Self.FK_OrderOrdersDetail">
-            <End Role="Orders" EntitySet="Orders" />
-            <End Role="OrdersDetails" EntitySet="OrdersDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductOrdersDetail" Association="Self.FK_ProductOrdersDetail">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="OrdersDetails" EntitySet="OrdersDetails" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="FlowerDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="FlowerDBModelStoreContainer">
+    <EntitySet Name="Accounts" EntityType="FlowerDBModel.Store.Accounts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories" EntityType="FlowerDBModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Orders" EntityType="FlowerDBModel.Store.Orders" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrdersDetails" EntityType="FlowerDBModel.Store.OrdersDetails" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products" EntityType="FlowerDBModel.Store.Products" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_AccountOrder" Association="FlowerDBModel.Store.FK_AccountOrder">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CategoryProduct" Association="FlowerDBModel.Store.FK_CategoryProduct">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderOrdersDetail" Association="FlowerDBModel.Store.FK_OrderOrdersDetail">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrdersDetails" EntitySet="OrdersDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductOrdersDetail" Association="FlowerDBModel.Store.FK_ProductOrdersDetail">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="OrdersDetails" EntitySet="OrdersDetails" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="Username" />
+    </Key>
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="FullName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Website" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Orders">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="CreationDate" Type="datetime" Nullable="false" />
+    <Property Name="Payment" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Account_Username" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="OrdersDetails">
+    <Key>
+      <PropertyRef Name="OrdersId" />
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="OrdersId" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="true" Precision="18" Scale="2" />
+    <Property Name="Quantity" Type="int" Nullable="true" />
+    <Property Name="Product_Id" Type="int" Nullable="false" />
+    <Property Name="Order_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Price" Type="decimal" Nullable="true" Precision="18" Scale="2" />
+    <Property Name="Quantity" Type="int" Nullable="true" />
+    <Property Name="Status" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Photo" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Specials" Type="bit" Nullable="true" />
+    <Property Name="CategoryId" Type="int" Nullable="true" />
+    <Property Name="Category_Id" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AccountOrder">
+    <End Role="Accounts" Type="FlowerDBModel.Store.Accounts" Multiplicity="1" />
+    <End Role="Orders" Type="FlowerDBModel.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="Username" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="Account_Username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CategoryProduct">
+    <End Role="Categories" Type="FlowerDBModel.Store.Categories" Multiplicity="1" />
+    <End Role="Products" Type="FlowerDBModel.Store.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="Category_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderOrdersDetail">
+    <End Role="Orders" Type="FlowerDBModel.Store.Orders" Multiplicity="1" />
+    <End Role="OrdersDetails" Type="FlowerDBModel.Store.OrdersDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrdersDetails">
+        <PropertyRef Name="Order_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductOrdersDetail">
+    <End Role="Products" Type="FlowerDBModel.Store.Products" Multiplicity="1" />
+    <End Role="OrdersDetails" Type="FlowerDBModel.Store.OrdersDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrdersDetails">
+        <PropertyRef Name="Product_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FlowerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -193,11 +193,12 @@
           <Property Name="Quantity" Type="Int32" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Specials" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Specials" Type="Boolean" />
           <Property Name="CategoryId" Type="Int32" />
           <Property Name="Category_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_CategoryProduct" FromRole="Products" ToRole="Categories" />
           <NavigationProperty Name="OrdersDetails" Relationship="Self.FK_ProductOrdersDetail" FromRole="Products" ToRole="OrdersDetails" />
+          <Property Name="Description" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="FK_AccountOrder">
           <End Role="Accounts" Type="Self.Account" Multiplicity="1" />
@@ -274,70 +275,70 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FlowerDBModelStoreContainer" CdmEntityContainer="FlowerDBEntities">
-          <EntitySetMapping Name="Accounts">
-            <EntityTypeMapping TypeName="FlowerDBModel.Account">
-              <MappingFragment StoreEntitySet="Accounts">
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Website" ColumnName="Website" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="FlowerDBModel.Category">
-              <MappingFragment StoreEntitySet="Categories">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="FlowerDBModel.Order">
-              <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-                <ScalarProperty Name="Payment" ColumnName="Payment" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Account_Username" ColumnName="Account_Username" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrdersDetails">
-            <EntityTypeMapping TypeName="FlowerDBModel.OrdersDetail">
-              <MappingFragment StoreEntitySet="OrdersDetails">
-                <ScalarProperty Name="OrdersId" ColumnName="OrdersId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
-                <ScalarProperty Name="Order_Id" ColumnName="Order_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="FlowerDBModel.Product">
-              <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Photo" ColumnName="Photo" />
-                <ScalarProperty Name="Specials" ColumnName="Specials" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FlowerDBModelStoreContainer" CdmEntityContainer="FlowerDBEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="IsTypeOf(FlowerDBModel.Account)">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(FlowerDBModel.Category)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="IsTypeOf(FlowerDBModel.Order)">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Payment" ColumnName="Payment" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Account_Username" ColumnName="Account_Username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdersDetails">
+      <EntityTypeMapping TypeName="IsTypeOf(FlowerDBModel.OrdersDetail)">
+        <MappingFragment StoreEntitySet="OrdersDetails">
+          <ScalarProperty Name="OrdersId" ColumnName="OrdersId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Product_Id" ColumnName="Product_Id" />
+          <ScalarProperty Name="Order_Id" ColumnName="Order_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="IsTypeOf(FlowerDBModel.Product)">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Specials" ColumnName="Specials" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -351,7 +352,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

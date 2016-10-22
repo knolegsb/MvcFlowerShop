@@ -273,6 +273,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\ICategoryRepository.cs" />
+    <Compile Include="Repository\IProductRepository.cs" />
+    <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -352,6 +354,7 @@
       <DependentUpon>FlowerDBModel.edmx</DependentUpon>
       <LastGenOutput>FlowerDBModel.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="FlowerDBModel.edmx.sql" />
     <Content Include="FlowerDBModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>FlowerDBModel.edmx</DependentUpon>

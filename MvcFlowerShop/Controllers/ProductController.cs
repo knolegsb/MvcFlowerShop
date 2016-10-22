@@ -10,6 +10,7 @@ namespace MvcFlowerShop.Controllers
     public class ProductController : Controller
     {
         private ICategoryRepository categoryRepository = new CategoryRepository();
+        private IProductRepository productRepository = new ProductRepository();
 
         public ActionResult Category(int id)
         {
@@ -21,11 +22,14 @@ namespace MvcFlowerShop.Controllers
 
         public ActionResult Specials()
         {
+            ViewBag.products = productRepository.SpecialProducts();
             return View("Specials");
         }
 
-        public ActionResult Details()
+        public ActionResult Details(int id)
         {
+            ViewBag.product = productRepository.Find(id);
+            ViewBag.relatedProducts = productRepository.RelatedProducts(productRepository.Find(id), 6);
             return View("Details");
         }
     }

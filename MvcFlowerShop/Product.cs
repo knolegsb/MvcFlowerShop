@@ -26,9 +26,10 @@ namespace MvcFlowerShop
         public Nullable<int> Quantity { get; set; }
         public string Status { get; set; }
         public string Photo { get; set; }
-        public string Specials { get; set; }
+        public Nullable<bool> Specials { get; set; }
         public Nullable<int> CategoryId { get; set; }
         public int Category_Id { get; set; }
+        public string Description { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

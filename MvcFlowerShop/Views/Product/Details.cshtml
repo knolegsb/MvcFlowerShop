@@ -4,25 +4,56 @@
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
 }
 
-<div class="crumb_nav"> <a href="#">home</a> &gt;&gt; product name </div>
-<div class="title"><span class="title_icon"><img src="@Url.Content("~/Content/Custom/")images/bullet1.gif" alt="" /></span>Product name</div>
+@section head {
+    @*<link rel="stylesheet" type="text/css" href="style.css" />*@
+    <link rel="stylesheet" href="@Url.Content("~/Content/Custom/css/")lightbox.css" type="text/css" media="screen" />
+
+    <script src="@Url.Content("~/Content/Custom/")js/prototype.js" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/Custom/")js/scriptaculous.js?load=effects" type="text/javascript"></script>
+    <script src="@Url.Content("~/Content/Custom/")js/lightbox.js" type="text/javascript"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Custom/")js/java.js"></script>
+}
+
+<div class="crumb_nav">
+    <a href="@Url.Action("Index", "Home")">home</a> &gt;&gt; @ViewBag.product.Name
+</div>
+<div class="title">
+    <span class="title_icon">
+        <img src="@Url.Content("~/Content/Custom/")images/bullet1.gif" alt="" />
+    </span>@ViewBag.product.Name
+</div>
 <div class="feat_prod_box_details">
     <div class="prod_img">
-        <a href="#"><img src="@Url.Content("~/Content/Custom/")images/prod1.gif" alt="" border="0" /></a> <br />
+        <a href="#">
+            <img src="@Url.Content("~/Content/Custom/")images/@ViewBag.product.Photo" alt="" border="0" />
+        </a> <br />
         <br />
-        <a href="@Url.Content("~/Content/Custom/")images/big_pic.jpg" rel="lightbox"><img src="@Url.Content("~/Content/Custom/")images/zoom.gif" alt="" border="0" /></a>
+        <a href="@Url.Content("~/Content/Custom/")images/big_pic.jpg" rel="lightbox">
+            <img src="@Url.Content("~/Content/Custom/")images/zoom.gif" alt="" border="0" />
+        </a>
     </div>
     <div class="prod_det_box">
         <div class="box_top"></div>
         <div class="box_center">
             <div class="prod_title">Details</div>
             <p class="details">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.<br />
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+                @ViewBag.product.Description
             </p>
-            <div class="price"><strong>PRICE:</strong> <span class="red">100 $</span></div>
-            <div class="price"><strong>COLORS:</strong> <span class="colors"><img src="@Url.Content("~/Content/Custom/")images/color1.gif" alt="" border="0" /></span> <span class="colors"><img src="@Url.Content("~/Content/Custom/")images/color2.gif" alt="" border="0" /></span> <span class="colors"><img src="@Url.Content("~/Content/Custom/")images/color3.gif" alt="" border="0" /></span> </div>
-            <a href="#" class="more"><img src="@Url.Content("~/Content/Custom/")images/order_now.gif" alt="" border="0" /></a>
+            <div class="price">
+                <strong>PRICE:</strong> <span class="red">100 $</span>
+            </div>
+            <div class="price">
+                <strong>COLORS:</strong> <span class="colors">
+                    <img src="@Url.Content("~/Content/Custom/")images/color1.gif" alt="" border="0" />
+                </span> <span class="colors">
+                    <img src="@Url.Content("~/Content/Custom/")images/color2.gif" alt="" border="0" />
+                </span> <span class="colors">
+                    <img src="@Url.Content("~/Content/Custom/")images/color3.gif" alt="" border="0" />
+                </span>
+            </div>
+            <a href="#" class="more">
+                <img src="@Url.Content("~/Content/Custom/")images/order_now.gif" alt="" border="0" />
+            </a>
             <div class="clear"></div>
         </div>
         <div class="box_bottom"></div>
@@ -36,42 +67,80 @@
     </ul>
     <div class="tabs-container">
         <div style="display: block;" class="tab" id="tab1">
-            <p class="more_details">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. </p>
-            <ul class="list">
-                <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></li>
-                <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></li>
-                <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></li>
-                <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></li>
-            </ul>
-            <p class="more_details">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. </p>
+            <p class="more_details">
+                @ViewBag.product.Description
+            </p>
+            @*<ul class="list">
+                    <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></li>
+                    <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></li>
+                    <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></li>
+                    <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit</a></li>
+                </ul>
+                <p class="more_details">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation. </p>*@
         </div>
         <div style="display: none;" class="tab" id="tab2">
-            <div class="new_prod_box">
+            @foreach (var product in ViewBag.relatedProducts)
+            {
+                <div class="new_prod_box">
+                    <a href="@Url.Action("Details", "Product", new { id = product.Id })">@product.Name</a>
+                    <div class="new_prod_bg">
+                        <a href="@Url.Action("Details", "Product", new { id = product.Id })">
+                            <img src="@Url.Content("~/Content/Custom/")images/@product.Photo" alt="" class="thumb" border="0" />
+                        </a>
+                    </div>
+                </div>
+            }
+
+        @*<div class="new_prod_box">
                 <a href="#">product name</a>
-                <div class="new_prod_bg"> <a href="#"><img src="@Url.Content("~/Content/Custom/")images/thumb1.gif" alt="" class="thumb" border="0" /></a> </div>
+                <div class="new_prod_bg">
+                    <a href="#">
+                        <img src="@Url.Content("~/Content/Custom/")images/thumb2.gif" alt="" class="thumb" border="0" />
+                    </a>
+                </div>
             </div>
             <div class="new_prod_box">
                 <a href="#">product name</a>
-                <div class="new_prod_bg"> <a href="#"><img src="@Url.Content("~/Content/Custom/")images/thumb2.gif" alt="" class="thumb" border="0" /></a> </div>
+                <div class="new_prod_bg">
+                    <a href="#">
+                        <img src="@Url.Content("~/Content/Custom/")images/thumb3.gif" alt="" class="thumb" border="0" />
+                    </a>
+                </div>
             </div>
             <div class="new_prod_box">
                 <a href="#">product name</a>
-                <div class="new_prod_bg"> <a href="#"><img src="@Url.Content("~/Content/Custom/")images/thumb3.gif" alt="" class="thumb" border="0" /></a> </div>
+                <div class="new_prod_bg">
+                    <a href="#">
+                        <img src="@Url.Content("~/Content/Custom/")images/thumb1.gif" alt="" class="thumb" border="0" />
+                    </a>
+                </div>
             </div>
             <div class="new_prod_box">
                 <a href="#">product name</a>
-                <div class="new_prod_bg"> <a href="#"><img src="@Url.Content("~/Content/Custom/")images/thumb1.gif" alt="" class="thumb" border="0" /></a> </div>
+                <div class="new_prod_bg">
+                    <a href="#">
+                        <img src="@Url.Content("~/Content/Custom/")images/thumb2.gif" alt="" class="thumb" border="0" />
+                    </a>
+                </div>
             </div>
             <div class="new_prod_box">
                 <a href="#">product name</a>
-                <div class="new_prod_bg"> <a href="#"><img src="@Url.Content("~/Content/Custom/")images/thumb2.gif" alt="" class="thumb" border="0" /></a> </div>
-            </div>
-            <div class="new_prod_box">
-                <a href="#">product name</a>
-                <div class="new_prod_bg"> <a href="#"><img src="@Url.Content("~/Content/Custom/")images/thumb3.gif" alt="" class="thumb" border="0" /></a> </div>
-            </div>
+                <div class="new_prod_bg">
+                    <a href="#">
+                        <img src="@Url.Content("~/Content/Custom/")images/thumb3.gif" alt="" class="thumb" border="0" />
+                    </a>
+                </div>
+            </div>*@
             <div class="clear"></div>
         </div>
     </div>
 </div>
 <div class="clear"></div>
+
+<script type="text/javascript">
+
+    var tabber1 = new Yetii({
+        id: 'demo'
+    });
+
+</script>

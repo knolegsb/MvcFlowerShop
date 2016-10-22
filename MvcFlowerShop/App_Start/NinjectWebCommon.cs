@@ -63,6 +63,7 @@ namespace MvcFlowerShop.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
+            kernel.Bind<IProductRepository>().To<ProductRepository>();
         }        
     }
 }
