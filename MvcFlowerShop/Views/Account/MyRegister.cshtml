@@ -1,4 +1,5 @@
-﻿
+﻿@model MvcFlowerShop.Account
+
 @{
     ViewBag.Title = "MyRegister";
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
@@ -9,41 +10,48 @@
     <p class="details"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud. </p>
     <div class="contact_form">
         <div class="form_subtitle">create new account</div>
-        <form name="register" href="#">
+        @using (Html.BeginForm("MyRegister", "Account", FormMethod.Post))
+        {
             <div class="form_row">
                 <label class="contact"><strong>Username:</strong></label>
-                <input type="text" class="contact_input" />
+                @Html.TextBoxFor(model => model.Username, new { @class="contact_input" })
+                @*<input type="text" class="contact_input" />*@
             </div>
             <div class="form_row">
                 <label class="contact"><strong>Password:</strong></label>
-                <input type="text" class="contact_input" />
+                @Html.PasswordFor(model => model.Password, new { @class="contact_input" })
+                @*<input type="text" class="contact_input" />*@
+            </div>
+            <div class="form_row">
+                <label class="contact"><strong>Full Name:</strong></label>
+                @Html.TextBoxFor(model => model.FullName, new { @class="contact_input" })
+                @*<input type="text" class="contact_input" />*@
             </div>
             <div class="form_row">
                 <label class="contact"><strong>Email:</strong></label>
-                <input type="text" class="contact_input" />
+                @Html.TextBoxFor(model => model.Email, new { @class = "contact_input" })
+                @*<input type="text" class="contact_input" />*@
             </div>
             <div class="form_row">
-                <label class="contact"><strong>Phone:</strong></label>
-                <input type="text" class="contact_input" />
+                <label class="contact"><strong>Website:</strong></label>
+                @Html.TextBoxFor(model => model.Website, new { @class = "contact_input" })
+                @*<input type="text" class="contact_input" />*@
             </div>
-            <div class="form_row">
-                <label class="contact"><strong>Company:</strong></label>
-                <input type="text" class="contact_input" />
-            </div>
-            <div class="form_row">
+            @*<div class="form_row">
                 <label class="contact"><strong>Adrres:</strong></label>
                 <input type="text" class="contact_input" />
-            </div>
-            <div class="form_row">
+            </div>*@
+            @*<div class="form_row">
                 <div class="terms">
                     <input type="checkbox" name="terms" />
                     I agree to the <a href="#">terms &amp; conditions</a>
                 </div>
-            </div>
+            </div>*@
             <div class="form_row">
                 <input type="submit" class="register" value="register" />
             </div>
-        </form>
+        }
+        
     </div>
 </div>
 <div class="clear"></div>

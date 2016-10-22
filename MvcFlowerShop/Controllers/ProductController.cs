@@ -20,6 +20,12 @@ namespace MvcFlowerShop.Controllers
             return View("Category");
         }
 
+        public ActionResult Latest()
+        {
+            ViewBag.products = productRepository.LatestProducts();
+            return View("Latest");
+        }
+
         public ActionResult Specials()
         {
             ViewBag.products = productRepository.SpecialProducts();

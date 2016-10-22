@@ -19,6 +19,11 @@ namespace MvcFlowerShop.Repository
             return db.Products.Find(id);
         }
 
+        public List<Product> LatestProducts()
+        {
+            return db.Products.OrderByDescending(p => p.Id).ToList();
+        }
+
         public List<Product> LatestProducts(int n)
         {
             return db.Products.OrderByDescending(p => p.Id).Take(n).ToList();

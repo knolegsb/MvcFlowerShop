@@ -19,22 +19,30 @@
             <div id="menu">
                 <ul>
                     @*<li class="selected"><a href="@Url.Action("Index", "Home")">home</a></li>*@
-                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Index") 
-                        && ViewContext.RouteData.Values["controller"].ToString().Equals("Home") ? "class=selected" : "")><a href="@Url.Action("Index", "Home")">home</a></li>
-                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("About") 
-                        && ViewContext.RouteData.Values["controller"].ToString().Equals("Home") ? "class=selected" : "")><a href="@Url.Action("About", "Home")">about us</a></li>
-                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Category") 
-                        && ViewContext.RouteData.Values["controller"].ToString().Equals("Product") ? "class=selected" : "")><a href="@Url.Action("Category", "Product")">flowers</a></li>
-                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Specials") 
-                        && ViewContext.RouteData.Values["controller"].ToString().Equals("Product") ? "class=selected" : "")><a href="@Url.Action("Specials", "Product")">specials gifts</a></li>
-                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("MyAccount") 
-                        && ViewContext.RouteData.Values["controller"].ToString().Equals("Account") ? "class=selected" : "")><a href="@Url.Action("MyAccount", "Account")">my accout</a></li>
-                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("MyRegister") 
-                        && ViewContext.RouteData.Values["controller"].ToString().Equals("Account") ? "class=selected" : "")><a href="@Url.Action("MyRegister", "Account")">register</a></li>
-                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Details") 
-                        && ViewContext.RouteData.Values["controller"].ToString().Equals("Product") ? "class=selected" : "")><a href="@Url.Action("Details", "Product")">prices</a></li>
-                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Contact") 
-                        && ViewContext.RouteData.Values["controller"].ToString().Equals("Home") ? "class=selected" : "")><a href="@Url.Action("Contact", "Home")">contact</a></li>
+                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Index") && ViewContext.RouteData.Values["controller"].ToString().Equals("Home") ? "class=selected" : "")>
+                        <a href="@Url.Action("Index", "Home")">home</a>
+                    </li>
+                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("About") && ViewContext.RouteData.Values["controller"].ToString().Equals("Home") ? "class=selected" : "")>
+                        <a href="@Url.Action("About", "Home")">about us</a>
+                    </li>
+                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Category") && ViewContext.RouteData.Values["controller"].ToString().Equals("Product") ? "class=selected" : "")>
+                        <a href="@Url.Action("Latest", "Product")">flowers</a>
+                    </li>
+                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Specials") && ViewContext.RouteData.Values["controller"].ToString().Equals("Product") ? "class=selected" : "")>
+                        <a href="@Url.Action("Specials", "Product")">specials gifts</a>
+                    </li>
+                    
+                    @*<li @(ViewContext.RouteData.Values["action"].ToString().Equals("Details")
+            && ViewContext.RouteData.Values["controller"].ToString().Equals("Product") ? "class=selected" : "")><a href="@Url.Action("Details", "Product")">prices</a></li>*@
+                    <li @(ViewContext.RouteData.Values["action"].ToString().Equals("Contact") && ViewContext.RouteData.Values["controller"].ToString().Equals("Home") ? "class=selected" : "")>
+                        <a href="@Url.Action("Contact", "Home")">contact</a>
+                    </li>
+                    <li style="float:right;" @(ViewContext.RouteData.Values["action"].ToString().Equals("MyAccount") && ViewContext.RouteData.Values["controller"].ToString().Equals("Account") ? "class=selected" : "")>
+                        <a href="@Url.Action("MyAccount", "Account")">my accout</a>
+                    </li>
+                    <li style="float:right;" @(ViewContext.RouteData.Values["action"].ToString().Equals("MyRegister") && ViewContext.RouteData.Values["controller"].ToString().Equals("Account") ? "class=selected" : "")>
+                        <a href="@Url.Action("MyRegister", "Account")">register</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -102,7 +110,13 @@
                 <img src="@Url.Content("~/Content/Custom/")images/footer_logo.gif" alt="" /><br />
                 <a href="http://csscreme.com"><img src="@Url.Content("~/Content/Custom/")images/csscreme.gif" alt="" border="0" /></a>
             </div>
-            <div class="right_footer"> <a href="#">home</a> <a href="#">about us</a> <a href="#">services</a> <a href="#">privacy policy</a> <a href="#">contact us</a> </div>
+            <div class="right_footer"> 
+                <a href="@Url.Action("Index", "Home")">home</a> 
+                <a href="@Url.Action("About", "Home")">about us</a> 
+                <a href="#">services</a> 
+                <a href="#">privacy policy</a> 
+                <a href="@Url.Action("Contact", "Home")">contact us</a> 
+            </div>
         </div>
     </div>
 </body>

@@ -10,6 +10,8 @@ namespace MvcFlowerShop.Repository
     {
         List<Product> LatestProducts(int n);
 
+        List<Product> LatestProducts();
+
         List<Product> FeaturedProducts(int n);
 
         List<Product> SpecialProducts();

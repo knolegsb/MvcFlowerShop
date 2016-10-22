@@ -51,7 +51,7 @@
                     <img src="@Url.Content("~/Content/Custom/")images/color3.gif" alt="" border="0" />
                 </span>
             </div>
-            <a href="#" class="more">
+            <a href="@Url.Action("Buy", "Cart", new { id = ViewBag.product.Id })" class="more">
                 <img src="@Url.Content("~/Content/Custom/")images/order_now.gif" alt="" border="0" />
             </a>
             <div class="clear"></div>

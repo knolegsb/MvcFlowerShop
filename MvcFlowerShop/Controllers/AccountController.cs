@@ -9,22 +9,34 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MvcFlowerShop.Models;
+using MvcFlowerShop.Repository;
 
 namespace MvcFlowerShop.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private IAccountRepository accountRepository = new AccountRepository();
+
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult MyRegister()
+        {
+            return View("MyRegister");
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult MyRegister(Account account)
+        {
+            accountRepository.Create(account);
+            return RedirectToAction("MyAccount", "Account");
+        }
+
         [AllowAnonymous]
         public ActionResult MyAccount()
         {
             return View("MyAccount");
-        }
-
-        [AllowAnonymous]
-        public ActionResult MyRegister()
-        {
-            return View("MyRegister");
         }
 
         private ApplicationSignInManager _signInManager;
